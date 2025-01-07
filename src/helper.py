@@ -213,3 +213,13 @@ def isBlacklistedRepository(full_name):
         if fnmatch.fnmatch(full_name, pattern):
             return True
     return False
+
+def isCustomRepository(full_name):
+    mirrorlist = config.get('mirrorlist', [])
+    if isinstance(mirrorlist, str):
+        mirrorlist = [mirrorlist]
+
+    for pattern in mirrorlist:
+        if fnmatch.fnmatch(full_name, pattern):
+            return True
+    return False
